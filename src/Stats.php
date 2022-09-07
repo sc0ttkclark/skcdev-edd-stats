@@ -2,6 +2,9 @@
 
 namespace SKCDEV\EDD_Stats;
 
+use EDD\Reports\Data\Report_Registry;
+use EDD_Exception;
+
 /**
  * Stats page functionality.
  *
@@ -31,14 +34,14 @@ class Stats {
 	 * Handle adding hooks.
 	 */
 	public function hook() : void {
-		add_action( 'admin_menu', [ $this, 'admin_menu' ], 11 );
+		add_action( 'edd_reports_init', [ $this, 'register_reports' ] );
 	}
 
 	/**
 	 * Handle removing hooks.
 	 */
 	public function unhook() : void {
-		remove_action( 'admin_menu', [ $this, 'admin_menu' ] );
+		remove_action( 'edd_reports_init', [ $this, 'register_reports' ] );
 	}
 
 	/**
@@ -57,19 +60,45 @@ class Stats {
 	}
 
 	/**
-	 * Handle admin init of stats functionality.
+	 * Add custom reports to EDD.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param Report_Registry $reports The report registry.
 	 */
-	public function admin_menu() : void {
-		$give_tools_page = add_submenu_page(
-			'edit.php?post_type=download',
-			__( 'Customer Stats', 'skcdev-edd-stats' ),
-			__( 'Customer Stats', 'skcdev-edd-stats' ),
-			'manage_options',
-			'skcdev-edd-stats',
-			[ $this, 'render_page' ]
-		);
+	function register_reports( Report_Registry $reports ) : void {
+		try {
+			/**
+			 * Cross-sells
+			 */
+			$reports->add_report( 'skcdev_edd_stats', [
+				'label'     => __( 'SKCDEV EDD Stats', 'skcdev-edd-stats' ),
+				'icon'      => 'dashboard',
+				'priority'  => 10,
+				'endpoints' => [
+					'tables' => [
+						'skcdev_edd_stats_table',
+					],
+				],
+			] );
+
+			$directory_path = Plugin::instance()->plugin_dir_path;
+
+			$reports->register_endpoint( 'skcdev_edd_stats_table', [
+				'label' => ' ',
+				'views' => [
+					'table' => [
+						'data_callback' => '::get_data',
+						'display_args'  => [
+							'class_name' => Report_Endpoint::class,
+							'class_file' => $directory_path . '/src/Report_Endpoint.php',
+						],
+					],
+				],
+			] );
+		} catch ( EDD_Exception $e ) {
+			// Nothing to see here.
+		}
 	}
 
 	public function render_page() : void {
