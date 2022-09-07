@@ -8,6 +8,12 @@ This is just a super simple solution. I did not spend time trying to make a real
 
 Historical stats show a number of different periods I'm interested in and then every year going back to the earliest order date.
 
+## Requirements
+
+* PHP 7.2+
+* WP 5.8+
+* EDD 3.0+
+
 ## Stats included
 
 ### Total Sales
