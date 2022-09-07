@@ -144,13 +144,13 @@ class Stats {
 			],
 		];
 
-		$sql = '
+		$sql = "
 			SELECT
-				YEAR( orders.date_created )
-			FROM pgp_edd_orders AS orders
-			ORDER BY orders.date_created ASC
+				YEAR( `orders`.`date_created` )
+			FROM `{$wpdb->edd_orders}` AS `orders`
+			ORDER BY `orders`.`date_created` ASC
 			LIMIT 1
-		';
+		";
 
 		$current_year = (int) date_i18n( 'Y' );
 		$since_year   = (int) $this->cached_get_var( $sql );
@@ -202,23 +202,23 @@ class Stats {
 	public function get_order_stats( array $args ) : array {
 		/** @var $wpdb wpdb */ global $wpdb;
 
-		$sql = '
+		$sql = "
 			SELECT
-				SUM( CAST( edd_order.total AS DECIMAL( 10, 2 ) ) ) AS total_amount,
-				SUM( CAST( edd_order.discount AS DECIMAL( 10, 2 ) ) ) AS total_discount,
-	            COUNT( DISTINCT edd_order.id ) AS total_orders,
-	            COUNT( DISTINCT edd_order.customer_id ) AS total_customers
-			FROM pgp_edd_orders AS edd_order
-			LEFT JOIN pgp_edd_subscriptions AS edd_subscription
-				ON edd_subscription.customer_id = edd_order.customer_id
-		';
+				SUM( CAST( `edd_order`.`total` AS DECIMAL( 10, 2 ) ) ) AS `total_amount`,
+				SUM( CAST( `edd_order`.`discount` AS DECIMAL( 10, 2 ) ) ) AS `total_discount`,
+	            COUNT( DISTINCT `edd_order`.`id` ) AS `total_orders`,
+	            COUNT( DISTINCT `edd_order`.`customer_id` ) AS `total_customers`
+			FROM `{$wpdb->edd_orders}` AS `edd_order`
+			LEFT JOIN `{$wpdb->prefix}edd_subscriptions` AS `edd_subscription`
+				ON `edd_subscription`.`customer_id` = `edd_order`.`customer_id`
+		";
 
 		$where         = [];
 		$prepared_args = [];
 
 		if ( ! empty( $args['order_status'] ) ) {
 			$where[] = '
-				edd_order.status IN ( ' . implode( ', ', array_fill( 0, count( (array) $args['order_status'] ), '%s' ) ) . ' )
+				`edd_order`.`status` IN ( ' . implode( ', ', array_fill( 0, count( (array) $args['order_status'] ), '%s' ) ) . ' )
 			';
 
 			$prepared_args = array_merge( $prepared_args, (array) $args['order_status'] );
@@ -226,7 +226,7 @@ class Stats {
 
 		if ( ! empty( $args['order_type'] ) ) {
 			$where[] = '
-				edd_order.type IN ( ' . implode( ', ', array_fill( 0, count( (array) $args['order_type'] ), '%s' ) ) . ' )
+				`edd_order`.`type` IN ( ' . implode( ', ', array_fill( 0, count( (array) $args['order_type'] ), '%s' ) ) . ' )
 			';
 
 			$prepared_args = array_merge( $prepared_args, (array) $args['order_type'] );
@@ -234,7 +234,7 @@ class Stats {
 
 		if ( ! empty( $args['subscription_status'] ) ) {
 			$where[] = '
-				edd_subscription.status IN ( ' . implode( ', ', array_fill( 0, count( (array) $args['subscription_status'] ), '%s' ) ) . ' )
+				`edd_subscription`.`status` IN ( ' . implode( ', ', array_fill( 0, count( (array) $args['subscription_status'] ), '%s' ) ) . ' )
 			';
 
 			$prepared_args = array_merge( $prepared_args, (array) $args['subscription_status'] );
@@ -242,7 +242,7 @@ class Stats {
 
 		if ( ! empty( $args['created_since_period'] ) ) {
 			$where[] = '
-				%s <= edd_order.date_created
+				%s <= `edd_order`.`date_created`
 			';
 
 			$prepared_args[] = $args['created_since_period'];
@@ -250,7 +250,7 @@ class Stats {
 
 		if ( ! empty( $args['created_end_period'] ) ) {
 			$where[] = '
-				edd_order.date_created <= %s
+				`edd_order`.`date_created` <= %s
 			';
 
 			$prepared_args[] = $args['created_end_period'];
@@ -259,11 +259,11 @@ class Stats {
 		if ( isset( $args['comped'] ) ) {
 			if ( ! empty( $args['comped'] ) ) {
 				$where[] = '
-					edd_order.total = 0
+					`edd_order`.`total` = 0
 				';
 			} else {
 				$where[] = '
-					edd_order.total != 0
+					`edd_order`.`total` != 0
 				';
 			}
 		}
@@ -271,11 +271,11 @@ class Stats {
 		if ( isset( $args['discounted'] ) ) {
 			if ( ! empty( $args['discounted'] ) ) {
 				$where[] = '
-					edd_order.discount != 0
+					`edd_order`.`discount` != 0
 				';
 			} else {
 				$where[] = '
-					edd_order.discount = 0
+					`edd_order`.`discount` = 0
 				';
 			}
 		}
@@ -337,20 +337,20 @@ class Stats {
 	public function get_subscription_stats( array $args ) : array {
 		/** @var $wpdb wpdb */ global $wpdb;
 
-		$sql = '
+		$sql = "
 			SELECT
-				SUM( CAST( edd_subscription.initial_amount AS DECIMAL( 10, 2 ) ) ) AS total_initial_amount,
-				SUM( CAST( edd_subscription.recurring_amount AS DECIMAL( 10, 2 ) ) ) AS total_recurring_amount,
-	            COUNT( DISTINCT edd_subscription.customer_id ) AS total_customers
-			FROM pgp_edd_subscriptions AS edd_subscription
-		';
+				SUM( CAST( `edd_subscription`.`initial_amount` AS DECIMAL( 10, 2 ) ) ) AS `total_initial_amount`,
+				SUM( CAST( `edd_subscription`.`recurring_amount` AS DECIMAL( 10, 2 ) ) ) AS `total_recurring_amount`,
+	            COUNT( DISTINCT `edd_subscription`.`customer_id` ) AS `total_customers`
+			FROM `{$wpdb->prefix}edd_subscriptions` AS `edd_subscription`
+		";
 
 		$where         = [];
 		$prepared_args = [];
 
 		if ( ! empty( $args['subscription_status'] ) ) {
 			$where[] = '
-				edd_subscription.status IN ( ' . implode( ', ', array_fill( 0, count( (array) $args['subscription_status'] ), '%s' ) ) . ' )
+				`edd_subscription`.`status` IN ( ' . implode( ', ', array_fill( 0, count( (array) $args['subscription_status'] ), '%s' ) ) . ' )
 			';
 
 			$prepared_args = array_merge( $prepared_args, (array) $args['subscription_status'] );
@@ -358,7 +358,7 @@ class Stats {
 
 		if ( ! empty( $args['created_since_period'] ) ) {
 			$where[] = '
-				%s <= edd_subscription.created
+				%s <= `edd_subscription`.`created`
 			';
 
 			$prepared_args[] = $args['created_since_period'];
@@ -366,7 +366,7 @@ class Stats {
 
 		if ( ! empty( $args['created_end_period'] ) ) {
 			$where[] = '
-				edd_subscription.created <= %s
+				`edd_subscription`.`created` <= %s
 			';
 
 			$prepared_args[] = $args['created_end_period'];
@@ -375,11 +375,11 @@ class Stats {
 		if ( isset( $args['comped'] ) ) {
 			if ( ! empty( $args['comped'] ) ) {
 				$where[] = '
-					edd_subscription.recurring_amount = 0
+					`edd_subscription`.`recurring_amount` = 0
 				';
 			} else {
 				$where[] = '
-					edd_subscription.recurring_amount != 0
+					`edd_subscription`.`recurring_amount` != 0
 				';
 			}
 		}
@@ -387,11 +387,11 @@ class Stats {
 		if ( isset( $args['expired'] ) ) {
 			if ( ! empty( $args['expired'] ) ) {
 				$where[] = '
-					edd_subscription.expiration < NOW()
+					`edd_subscription`.`expiration` < NOW()
 				';
 			} else {
 				$where[] = '
-					NOW() <= edd_subscription.expiration
+					NOW() <= `edd_subscription`.`expiration`
 				';
 			}
 		}
@@ -410,9 +410,11 @@ class Stats {
 		$result = $wpdb->get_row( $sql );
 
 		$stats = [
-			'total_initial_amount'   => 0,
-			'total_recurring_amount' => 0,
-			'total_customers'        => 0,
+			'total_initial_amount'              => 0,
+			'total_recurring_amount'            => 0,
+			'total_customers'                   => 0,
+			'avg_initial_amount_per_customer'   => 0,
+			'avg_recurring_amount_per_customer' => 0,
 		];
 
 		if ( ! empty( $result ) ) {
