@@ -3,7 +3,7 @@
  * Plugin Name: SKCDEV Easy Digital Download Stats
  * Plugin URI: https://skc.dev/
  * Description: Custom stats page for Easy Digital Downloads (EDD).
- * Version: 1.0.0-b-1
+ * Version: 1.0.0
  * Author: SKC Development, LLC
  * Author URI: https://skc.dev/
  * License: GPL-2.0+
