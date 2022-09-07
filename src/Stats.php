@@ -140,6 +140,16 @@ class Stats {
 			'label' => 'Store total',
 		];
 
+		/**
+		 * Allow filtering the historical stats periods used.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $stats The stats periods.
+		 * @param array $args  The stats args used.
+		 */
+		$stats = apply_filters( 'skcdev_edd_stats_historical_stats_periods', $stats, $args );
+
 		foreach ( $stats as $key => $period ) {
 			$stats_args = array_merge( $period, $args );
 
