@@ -84,13 +84,13 @@ Historical stats show a number of different periods I'm interested in and then e
 
 ### Refunds
 
-| Statistic      | Amount  | Customers     | Average          |
-|----------------|---------|---------------|------------------|
-| Last 7 days    | $123.00 | 123 customers | $1.00 / customer |
-| Last 30 days   | $123.00 | 123 customers | $1.00 / customer |
-| Last 3 months  | $123.00 | 123 customers | $1.00 / customer |
-| Last 6 months  | $123.00 | 123 customers | $1.00 / customer |
-| Last 12 months | $123.00 | 123 customers | $1.00 / customer |
-| Year: 2022     | $123.00 | 123 customers | $1.00 / customer |
-| Year: 2021     | $123.00 | 123 customers | $1.00 / customer |
-| Store total    | $123.00 | 123 customers | $1.00 / customer |
+| Statistic      | Amount   | Customers     | Average           |
+|----------------|----------|---------------|-------------------|
+| Last 7 days    | -$123.00 | 123 customers | -$1.00 / customer |
+| Last 30 days   | -$123.00 | 123 customers | -$1.00 / customer |
+| Last 3 months  | -$123.00 | 123 customers | -$1.00 / customer |
+| Last 6 months  | -$123.00 | 123 customers | -$1.00 / customer |
+| Last 12 months | -$123.00 | 123 customers | -$1.00 / customer |
+| Year: 2022     | -$123.00 | 123 customers | -$1.00 / customer |
+| Year: 2021     | -$123.00 | 123 customers | -$1.00 / customer |
+| Store total    | -$123.00 | 123 customers | -$1.00 / customer |
