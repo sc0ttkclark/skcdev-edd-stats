@@ -21,6 +21,7 @@ Historical stats show a number of different periods I'm interested in and then e
 | Last 12 months | $123.00 | 123 customers | $1.00 / customer |
 | Year: 2022     | $123.00 | 123 customers | $1.00 / customer |
 | Year: 2021     | $123.00 | 123 customers | $1.00 / customer |
+| Year: ....     | $123.00 | 123 customers | $1.00 / customer |
 | Store total    | $123.00 | 123 customers | $1.00 / customer |
 
 ### Current Subscriptions
@@ -43,6 +44,7 @@ Historical stats show a number of different periods I'm interested in and then e
 | Last 12 months | $123.00 | 123 customers | $1.00 / customer |
 | Year: 2022     | $123.00 | 123 customers | $1.00 / customer |
 | Year: 2021     | $123.00 | 123 customers | $1.00 / customer |
+| Year: ....     | $123.00 | 123 customers | $1.00 / customer |
 | Store total    | $123.00 | 123 customers | $1.00 / customer |
 
 ### Renewals
@@ -56,6 +58,7 @@ Historical stats show a number of different periods I'm interested in and then e
 | Last 12 months | $123.00 | 123 customers | $1.00 / customer |
 | Year: 2022     | $123.00 | 123 customers | $1.00 / customer |
 | Year: 2021     | $123.00 | 123 customers | $1.00 / customer |
+| Year: ....     | $123.00 | 123 customers | $1.00 / customer |
 | Store total    | $123.00 | 123 customers | $1.00 / customer |
 
 ### Discounts
@@ -69,6 +72,7 @@ Historical stats show a number of different periods I'm interested in and then e
 | Last 12 months | $123.00 | 123 customers | $1.00 / customer |
 | Year: 2022     | $123.00 | 123 customers | $1.00 / customer |
 | Year: 2021     | $123.00 | 123 customers | $1.00 / customer |
+| Year: ....     | $123.00 | 123 customers | $1.00 / customer |
 | Store total    | $123.00 | 123 customers | $1.00 / customer |
 
 ### Comped (Free)
@@ -82,6 +86,7 @@ Historical stats show a number of different periods I'm interested in and then e
 | Last 12 months | 123 customers |
 | Year: 2022     | 123 customers |
 | Year: 2021     | 123 customers |
+| Year: ....     | 123 customers |
 | Store total    | 123 customers |
 
 ### Refunds
@@ -95,4 +100,5 @@ Historical stats show a number of different periods I'm interested in and then e
 | Last 12 months | -$123.00 | 123 customers | -$1.00 / customer |
 | Year: 2022     | -$123.00 | 123 customers | -$1.00 / customer |
 | Year: 2021     | -$123.00 | 123 customers | -$1.00 / customer |
+| Year: ....     | -$123.00 | 123 customers | -$1.00 / customer |
 | Store total    | -$123.00 | 123 customers | -$1.00 / customer |
